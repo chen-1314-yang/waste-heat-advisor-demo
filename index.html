@@ -1439,13 +1439,15 @@ function ioRenderCfg() {
       <select id="file-medium"><option>热水/冷凝水</option><option>烟气</option><option>工艺液体</option></select></div>
       <div class="note">CSV 模板：ts,t_src_degC,m_dot_kg_s[,medium,demand,continuity,driver,dT_degC,hours]；缺失列用默认值补全；按真实时间戳回放。</div>`;
   } else if (kind === "http") {
+    const host = location.hostname || "127.0.0.1";
     h = `<div class="field"><label>HTTP 地址</label>
-      <input id="http-url" placeholder="http://127.0.0.1:8791/api/telemetry" value="http://127.0.0.1:8791/api/telemetry"></div>
+      <input id="http-url" placeholder="http://127.0.0.1:8791/api/telemetry" value="http://${host}:8791/api/telemetry"></div>
       <div class="field"><label>轮询间隔 <b id="v-http-iv">2000 ms</b></label>
       <input type="range" id="http-iv" min="200" max="10000" step="100" value="2000"></div>`;
   } else {
+    const host = location.hostname || "127.0.0.1";
     h = `<div class="field"><label>WebSocket 地址</label>
-      <input id="ws-url" placeholder="ws://127.0.0.1:8787/ws" value="ws://127.0.0.1:8787/ws"></div>`;
+      <input id="ws-url" placeholder="ws://127.0.0.1:8787/ws" value="ws://${host}:8787/ws"></div>`;
   }
   box.innerHTML = h;
   ["sim-t", "sim-amp", "sim-f", "http-iv"].forEach((id) => {
